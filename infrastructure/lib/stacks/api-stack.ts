@@ -3,14 +3,21 @@ import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as lambdaNodejs from "aws-cdk-lib/aws-lambda-nodejs";
 import * as apigateway from "aws-cdk-lib/aws-apigatewayv2";
 import * as apigatewayIntegrations from "aws-cdk-lib/aws-apigatewayv2-integrations";
+import * as apigatewayAuthorizers from "aws-cdk-lib/aws-apigatewayv2-authorizers";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
+import * as cognito from "aws-cdk-lib/aws-cognito";
+import * as s3 from "aws-cdk-lib/aws-s3";
 import * as logs from "aws-cdk-lib/aws-logs";
 import { Construct } from "constructs";
 import * as path from "path";
 
 interface ReportsApiStackProps extends cdk.StackProps {
   reportsTable: dynamodb.Table;
+  userProfilesTable: dynamodb.Table;
+  userPool: cognito.UserPool;
+  userPoolClient: cognito.UserPoolClient;
+  logosBucket: s3.Bucket;
 }
 
 export class ReportsApiStack extends cdk.Stack {
@@ -19,7 +26,7 @@ export class ReportsApiStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ReportsApiStackProps) {
     super(scope, id, props);
 
-    const { reportsTable } = props;
+    const { reportsTable, userProfilesTable, userPool, userPoolClient, logosBucket } = props;
 
     // ADR: Lambda role follows least-privilege (NFR-04). Only specific Bedrock model ARNs
     // and the specific DynamoDB table ARN are granted — not wildcards. Both Bedrock model
@@ -51,6 +58,8 @@ export class ReportsApiStack extends cdk.Stack {
     );
 
     reportsTable.grantReadWriteData(lambdaRole);
+    userProfilesTable.grantReadWriteData(lambdaRole);
+    logosBucket.grantReadWrite(lambdaRole);
 
     // ── Lambda Function ──────────────────────────────────────────────────
     const reportsLambda = new lambdaNodejs.NodejsFunction(this, "ReportsHandler", {
@@ -76,6 +85,8 @@ export class ReportsApiStack extends cdk.Stack {
       },
       environment: {
         TABLE_NAME: reportsTable.tableName,
+        USER_PROFILES_TABLE: userProfilesTable.tableName,
+        LOGOS_BUCKET_NAME: logosBucket.bucketName,
         BEDROCK_MODEL_ID: "us.anthropic.claude-haiku-4-5-20251001-v1:0",
         AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
         ALLOWED_ORIGIN: "*",
@@ -105,25 +116,57 @@ export class ReportsApiStack extends cdk.Stack {
       reportsLambda
     );
 
+    // JWT Authorizer — Cognito validates the token before Lambda is invoked.
+    // Satisfies NFR-04: Lambda never receives unauthenticated requests on protected routes.
+    const jwtAuthorizer = new apigatewayAuthorizers.HttpJwtAuthorizer(
+      "CognitoAuthorizer",
+      `https://cognito-idp.${this.region}.amazonaws.com/${userPool.userPoolId}`,
+      {
+        jwtAudience: [userPoolClient.userPoolClientId],
+      }
+    );
+
     httpApi.addRoutes({
       path: "/api/generate",
       methods: [apigateway.HttpMethod.POST],
       integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
     });
     httpApi.addRoutes({
       path: "/api/reports",
       methods: [apigateway.HttpMethod.POST],
       integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
     });
     httpApi.addRoutes({
       path: "/api/reports",
       methods: [apigateway.HttpMethod.GET],
       integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
     });
     httpApi.addRoutes({
       path: "/api/reports/{reportId}",
       methods: [apigateway.HttpMethod.DELETE],
       integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
+    });
+    httpApi.addRoutes({
+      path: "/api/profile",
+      methods: [apigateway.HttpMethod.GET],
+      integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
+    });
+    httpApi.addRoutes({
+      path: "/api/profile",
+      methods: [apigateway.HttpMethod.POST],
+      integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
+    });
+    httpApi.addRoutes({
+      path: "/api/upload-url",
+      methods: [apigateway.HttpMethod.POST],
+      integration: lambdaIntegration,
+      authorizer: jwtAuthorizer,
     });
 
     this.apiUrl = httpApi.apiEndpoint;

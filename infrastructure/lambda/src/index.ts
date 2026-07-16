@@ -1,11 +1,14 @@
 import {
-  APIGatewayProxyEventV2,
+  APIGatewayProxyEventV2WithJWTAuthorizer,
   APIGatewayProxyStructuredResultV2,
 } from "aws-lambda";
 import { generateReport } from "./handlers/generateReport";
 import { saveReportHandler } from "./handlers/saveReport";
 import { getHistory } from "./handlers/getHistory";
 import { deleteReportHandler } from "./handlers/deleteReport";
+import { saveProfile } from "./handlers/saveProfile";
+import { getProfile } from "./handlers/getProfile";
+import { getUploadUrl } from "./handlers/getUploadUrl";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": process.env.ALLOWED_ORIGIN ?? "*",
@@ -15,7 +18,7 @@ const CORS_HEADERS = {
 };
 
 export const handler = async (
-  event: APIGatewayProxyEventV2
+  event: APIGatewayProxyEventV2WithJWTAuthorizer
 ): Promise<APIGatewayProxyStructuredResultV2> => {
   // Handle CORS preflight
   if (event.requestContext.http.method === "OPTIONS") {
@@ -38,6 +41,15 @@ export const handler = async (
         break;
       case "DELETE /api/reports/{reportId}":
         result = await deleteReportHandler(event);
+        break;
+      case "POST /api/profile":
+        result = await saveProfile(event);
+        break;
+      case "GET /api/profile":
+        result = await getProfile(event);
+        break;
+      case "POST /api/upload-url":
+        result = await getUploadUrl(event);
         break;
       default:
         result = {

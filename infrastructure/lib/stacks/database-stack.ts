@@ -7,6 +7,7 @@ import { Construct } from "constructs";
 // on-demand avoids idle-capacity cost and satisfies the <$10/month target (NFR-02).
 export class ReportsDatabaseStack extends cdk.Stack {
   public readonly reportsTable: dynamodb.Table;
+  public readonly userProfilesTable: dynamodb.Table;
 
   constructor(scope: Construct, id: string, props: cdk.StackProps) {
     super(scope, id, props);
@@ -36,6 +37,25 @@ export class ReportsDatabaseStack extends cdk.Stack {
     new cdk.CfnOutput(this, "TableArn", {
       value: this.reportsTable.tableArn,
       exportName: "DailyReports-TableArn",
+    });
+
+    // UserProfiles table: stores extended profile data Cognito does not natively
+    // support (company name, department, S3 logo key). PK is the Cognito sub (userId).
+    this.userProfilesTable = new dynamodb.Table(this, "UserProfilesTable", {
+      tableName: "UserProfiles",
+      partitionKey: { name: "userId", type: dynamodb.AttributeType.STRING },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
+    new cdk.CfnOutput(this, "UserProfilesTableName", {
+      value: this.userProfilesTable.tableName,
+      exportName: "DailyReports-UserProfilesTableName",
+    });
+
+    new cdk.CfnOutput(this, "UserProfilesTableArn", {
+      value: this.userProfilesTable.tableArn,
+      exportName: "DailyReports-UserProfilesTableArn",
     });
   }
 }

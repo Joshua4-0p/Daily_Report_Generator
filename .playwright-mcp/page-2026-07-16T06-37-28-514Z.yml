@@ -1,0 +1,155 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "UX Pilot home" [ref=e7] [cursor=pointer]:
+            - /url: /?utm_source=share&utm_medium=header&utm_campaign=logo
+            - img "UX Pilot" [ref=e8]
+          - generic [ref=e9]: Try UX Pilot for Free
+        - generic [ref=e15]:
+          - button "75%" [ref=e16] [cursor=pointer]
+          - button "Desktop" [ref=e19] [cursor=pointer]
+          - generic [ref=e21]:
+            - generic [ref=e23]:
+              - spinbutton [ref=e24]: "1440"
+              - generic [ref=e25]: W
+            - generic [ref=e27]:
+              - spinbutton [ref=e28]: "920"
+              - generic [ref=e29]: H
+        - generic [ref=e31]:
+          - button "Toggle comments" [ref=e33] [cursor=pointer]
+          - button "Toggle fullscreen" [ref=e37] [cursor=pointer]
+          - button "Sign up to make it yours" [ref=e43] [cursor=pointer]:
+            - generic [ref=e47]: Make it mine
+    - main [ref=e48]:
+      - generic [ref=e49]:
+        - iframe [ref=e54]:
+          - generic [ref=f8e2]:
+            - generic [ref=f8e3]:
+              - navigation [ref=f8e4]:
+                - generic [ref=f8e6]:
+                  - generic [ref=f8e7] [cursor=pointer]: DailyReport AI
+                  - generic [ref=f8e12]:
+                    - button "Home" [ref=f8e13] [cursor=pointer]
+                    - button "Features" [ref=f8e14] [cursor=pointer]
+                    - button "About" [ref=f8e15] [cursor=pointer]
+                    - button "Contact" [ref=f8e16] [cursor=pointer]
+                  - generic [ref=f8e17]:
+                    - button "Sign In" [ref=f8e18] [cursor=pointer]
+                    - button "Get Started" [ref=f8e19] [cursor=pointer]
+              - generic [ref=f8e21]:
+                - generic [ref=f8e22]:
+                  - generic [ref=f8e23]: Powered by Amazon Bedrock · Claude Haiku 4.5
+                  - heading "Turn your daily work notes into professional reports in seconds." [level=1] [ref=f8e26]: Turn your daily work notes intoprofessional reportsin seconds.
+                  - paragraph [ref=f8e27]: Write freely in plain language. Our AI formats it into a structured, branded daily report — ready to download as PDF.
+                  - generic [ref=f8e28]:
+                    - button "Get Started Free" [ref=f8e29] [cursor=pointer]
+                    - button "See how it works" [ref=f8e30] [cursor=pointer]
+                  - generic [ref=f8e31]:
+                    - generic [ref=f8e32]: No credit card required
+                    - generic [ref=f8e37]: AWS Cognito secured
+                    - generic [ref=f8e41]: Ready in 30 seconds
+                - generic [ref=f8e47]:
+                  - generic [ref=f8e48]: dailyreport.ai/generator
+                  - generic [ref=f8e55]:
+                    - generic [ref=f8e56]:
+                      - generic [ref=f8e57]: What did you do today?
+                      - generic [ref=f8e58]: "Fixed the auth bug in login flow, wrote unit tests for the report generator, reviewed PR #42 from teammate, updated API documentation..."
+                      - generic [ref=f8e59]: Plans for tomorrow?
+                      - generic [ref=f8e60]: Deploy to staging, run integration tests...
+                      - button "Generate Report" [ref=f8e61] [cursor=pointer]
+                    - generic [ref=f8e64]:
+                      - generic [ref=f8e65]: AI-Generated Report
+                      - generic [ref=f8e72]: Tasks Completed Today
+                      - generic [ref=f8e73]: "• Resolved authentication bug in login flow• Authored comprehensive unit test suite• Conducted code review for PR #42"
+                      - generic [ref=f8e74]: Overall Status
+                      - generic [ref=f8e75]: ✓ On Track
+              - generic [ref=f8e77]:
+                - generic [ref=f8e78]:
+                  - generic [ref=f8e79]: Features
+                  - heading "Everything you need for daily reporting" [level=2] [ref=f8e80]
+                  - paragraph [ref=f8e81]: Stop spending 20 minutes formatting reports. Write once, download professionally.
+                - generic [ref=f8e82]:
+                  - generic [ref=f8e84]:
+                    - heading "AI-Powered Formatting" [level=3] [ref=f8e88]
+                    - paragraph [ref=f8e89]: Write in plain language. Claude Haiku 4.5 on AWS Bedrock structures it into a professional, well-organized report instantly.
+                  - generic [ref=f8e91]:
+                    - heading "Branded Templates" [level=3] [ref=f8e96]
+                    - paragraph [ref=f8e97]: 4 document templates — Classic, Professional, Modern, Corporate. Your company logo, name, and department on every report.
+                  - generic [ref=f8e99]:
+                    - heading "Instant PDF Download" [level=3] [ref=f8e104]
+                    - paragraph [ref=f8e105]: Download your report as a polished PDF in seconds. Saved to your history so you can re-download anytime.
+                - generic [ref=f8e106]:
+                  - generic [ref=f8e107]:
+                    - generic [ref=f8e111]: < 5s
+                    - generic [ref=f8e112]: Report generation
+                  - generic [ref=f8e113]:
+                    - generic [ref=f8e117]: "4"
+                    - generic [ref=f8e118]: PDF templates
+                  - generic [ref=f8e119]:
+                    - generic [ref=f8e122]: 100%
+                    - generic [ref=f8e123]: AWS serverless
+                  - generic [ref=f8e124]:
+                    - generic [ref=f8e127]: Free
+                    - generic [ref=f8e128]: To get started
+              - generic [ref=f8e131]:
+                - generic [ref=f8e132]:
+                  - generic [ref=f8e133]: About
+                  - heading "Built for professionals everywhere" [level=2] [ref=f8e134]
+                  - paragraph [ref=f8e135]: Daily reports are a universal workplace requirement. DailyReport AI was built during the AWS Weekend Productivity Challenge to solve the friction of translating a productive day into a formatted document.
+                  - paragraph [ref=f8e136]: Most professionals spend 15–30 minutes every day writing and formatting the same report structure. With DailyReport AI, you write your raw notes and let Claude Haiku 4.5 handle the rest — in seconds.
+                  - generic [ref=f8e137]:
+                    - paragraph [ref=f8e138]: Built on AWS
+                    - generic [ref=f8e139]:
+                      - generic [ref=f8e140]: Amplify
+                      - generic [ref=f8e141]: Lambda
+                      - generic [ref=f8e142]: Bedrock
+                      - generic [ref=f8e143]: Cognito
+                      - generic [ref=f8e144]: DynamoDB
+                      - generic [ref=f8e145]: S3
+                      - generic [ref=f8e146]: API Gateway
+                - generic [ref=f8e147]:
+                  - generic [ref=f8e148]:
+                    - generic [ref=f8e149]: Before — Raw notes
+                    - paragraph [ref=f8e153]: "\"fixed that bug where users couldn't login, also wrote some tests for it, reviewed james's pr, updated docs for the api, tomorrow need to deploy to staging and check if everything works\""
+                  - generic [ref=f8e154]: Claude Haiku 4.5 on AWS Bedrock
+                  - generic [ref=f8e161]:
+                    - generic [ref=f8e162]: After — Professional report
+                    - generic [ref=f8e165]:
+                      - generic [ref=f8e166]:
+                        - paragraph [ref=f8e167]: Tasks Completed Today
+                        - list [ref=f8e168]:
+                          - listitem [ref=f8e169]: • Resolved critical authentication bug preventing user login
+                          - listitem [ref=f8e170]: • Authored comprehensive unit test suite for bug fix
+                          - listitem [ref=f8e171]: • Completed code review for PR from colleague James
+                          - listitem [ref=f8e172]: • Updated API documentation with latest endpoints
+                      - generic [ref=f8e173]:
+                        - paragraph [ref=f8e174]: Overall Status
+                        - generic [ref=f8e175]: ✓ On Track
+              - generic [ref=f8e177]:
+                - heading "Have questions or feedback?" [level=2] [ref=f8e178]
+                - paragraph [ref=f8e179]: We'd love to hear from you. Reach out or explore the project.
+                - generic [ref=f8e180]:
+                  - link "joshuatiayafotseu@example.com" [ref=f8e181] [cursor=pointer]:
+                    - /url: mailto:joshuatiayafotseu@example.com
+                  - link "GitHub Repo" [ref=f8e185] [cursor=pointer]:
+                    - /url: https://github.com
+                - paragraph [ref=f8e190]: Built for AWS Weekend Productivity Challenge · July 2026
+            - region "Notifications alt+T"
+        - button "Made in UX Pilot - Click to visit UX Pilot website" [ref=e55] [cursor=pointer]:
+          - generic [ref=e60]: Made in UX Pilot
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - heading "Comments" [level=3] [ref=e63]
+            - button [ref=e64] [cursor=pointer]
+          - generic [ref=e68]:
+            - textbox "Search" [ref=e73]
+            - button [ref=e75] [cursor=pointer]:
+              - img "Filter" [ref=e76]
+          - generic [ref=e78]:
+            - img "Sign in" [ref=e80]
+            - paragraph [ref=e81]: Sign in to comment
+            - paragraph [ref=e82]: Sign in to view and add comments on this design.
+  - alert [ref=e83]
+  - iframe
